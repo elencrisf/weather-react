@@ -5,9 +5,7 @@ import Form from "./Components/Form";
 import Title from "./Components/Title";
 import "./App.css";
 
-
-const Api_Key = "27289e1da449c7d3cfb8b0db0cfab0d2";
-
+require('dotenv').config()
 
 
 
@@ -33,7 +31,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=Vancouver&units=metric&appid=${Api_Key}`)
+    fetch(`http://api.openweathermap.org/data/2.5/weather?q=Vancouver&units=metric&appid=${process.env.REACT_APP_API_KEY}`)
     .then(response => response.json()) // first of all you use the same argument for both requests. both the response and parsed data uses the same name and it's a bad practice. try to avoid that by calling the json one something like data or more meaningful name
     .then(response => {
 
@@ -79,7 +77,7 @@ let sunrise = response.sys.sunrise,
     // const country = e.target.elements.country.value;
     e.preventDefault();
     try {
-      const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${Api_Key}`);
+      const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_API_KEY}`);
       const response = await api_call.json();
       // let parseZoneTime = parseTime(response.sys.synrise, response.timezone);
       console.log(response);
